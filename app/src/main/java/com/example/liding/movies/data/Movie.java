@@ -9,6 +9,7 @@ public class Movie implements Serializable {
     private final int IMAGE_SIZE_342 = 342;
     private final int IMAGE_SIZE_500 = 500;
 
+    private String id;
     private String overview;
     private String title;
     private String release_date;
@@ -18,6 +19,10 @@ public class Movie implements Serializable {
     public Movie(HashMap<String, String> data) {
         if(data == null) {
             return;
+        }
+
+        if (data.get(MovieFetchTask.MOVIE_ID) != null) {
+            id = data.get(MovieFetchTask.MOVIE_ID);
         }
 
         if (data.get(MovieFetchTask.MOVIE_OVERVIEW) != null) {
@@ -47,6 +52,10 @@ public class Movie implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Double getVote() {

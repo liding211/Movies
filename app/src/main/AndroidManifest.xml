@@ -23,6 +23,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.liding.movies.MainActivity" />
         </activity>
+        <provider
+            android:authorities="com.example.liding.movies"
+            android:name=".data.MoviesProvider" />
     </application>
 
 </manifest>

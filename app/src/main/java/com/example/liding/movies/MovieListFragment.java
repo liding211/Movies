@@ -36,7 +36,7 @@ public class MovieListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         adapter = new MovieAdapter(getActivity(), R.layout.movie_list_fragment);
-        updateMovieList();
+        updateMovieList(MovieFetchTask.MoviesListType.MOVIES_MOST_POPULAR);
         View rootView = inflater.inflate(R.layout.movie_list_fragment, container, false);
 
         GridView moviesGrid = (GridView) rootView.findViewById(R.id.movie_list_grid);
@@ -55,9 +55,9 @@ public class MovieListFragment extends Fragment {
         return rootView;
     }
 
-    public void updateMovieList() {
+    public void updateMovieList(MovieFetchTask.MoviesListType type) {
         MovieFetchTask task = new MovieFetchTask(getActivity(), adapter);
-        task.execute();
+        task.execute(type);
     }
 
     @Override
@@ -67,8 +67,12 @@ public class MovieListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_refresh) {
-            updateMovieList();
+        if (item.getItemId() == R.id.most_popular) {
+            updateMovieList(MovieFetchTask.MoviesListType.MOVIES_MOST_POPULAR);
+            return true;
+        }
+        if (item.getItemId() == R.id.highest_rated) {
+            updateMovieList(MovieFetchTask.MoviesListType.MOVIES_HIGHEST_RATED);
             return true;
         }
         return super.onOptionsItemSelected(item);

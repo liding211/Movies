@@ -20,10 +20,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
-public class MovieFetchTask extends AsyncTask<Void, Void, HashMap<Integer, HashMap<String, String>>> {
+public class MovieFetchTask extends AsyncTask<MovieFetchTask.MoviesListType, Void, HashMap<Integer, HashMap<String, String>>> {
 
     private final String LOG_TAG = MovieFetchTask.class.getSimpleName();
-    private final String BASE_API_URL = "http://api.themoviedb.org/";
+    private final String BASE_API_URL = "http://api.themoviedb.org";
+    private final String API_LEVEL = "3";
+    private final String SECTION_MOVIE = "movie";
+    private final String SLASH = "/";
+
+
     private final String SORT_BY_PARAM = "sort_by";
     private final String API_KEY_PARAM = "api_key";
 
@@ -37,6 +42,20 @@ public class MovieFetchTask extends AsyncTask<Void, Void, HashMap<Integer, HashM
     public static final String MOVIE_RELEASE_DATE = "release_date";
     public static final String MOVIE_ID = "id";
 
+    public static enum MoviesListType {
+        MOVIES_MOST_POPULAR("popular"),
+        MOVIES_HIGHEST_RATED("top_rated");
+
+        String listType;
+
+        MoviesListType(String value) {
+            listType = value;
+        }
+
+        public String toString() {
+            return listType;
+        }
+    }
     private Context context;
     private MovieAdapter adapter;
 
@@ -46,10 +65,28 @@ public class MovieFetchTask extends AsyncTask<Void, Void, HashMap<Integer, HashM
     }
 
     @Override
-    protected HashMap<Integer, HashMap<String, String>> doInBackground(Void... params) {
-        final String REQUEST_URL = BASE_API_URL + "/3/movie/popular?";
+    protected HashMap<Integer, HashMap<String, String>> doInBackground(MoviesListType... params) {
 
-        Uri builtUri = Uri.parse(REQUEST_URL).buildUpon()
+        String request_url  = BASE_API_URL + SLASH + API_LEVEL + SLASH + SECTION_MOVIE;
+
+        if (params.length > 0 && params[0] != null) {
+            switch (params[0]) {
+                case MOVIES_MOST_POPULAR:
+                    request_url += SLASH + MoviesListType.MOVIES_MOST_POPULAR.toString();
+                    break;
+                case MOVIES_HIGHEST_RATED:
+                    request_url += SLASH + MoviesListType.MOVIES_HIGHEST_RATED.toString();
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            request_url += SLASH + MoviesListType.MOVIES_MOST_POPULAR.toString();
+        }
+
+        request_url += "?";
+
+        Uri builtUri = Uri.parse(request_url).buildUpon()
                 .appendQueryParameter(API_KEY_PARAM, BuildConfig.THE_MOVIE_DB_API_KEY)
                 .build();
 

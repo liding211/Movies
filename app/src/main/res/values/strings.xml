@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="title_activity_detail">Movie detail</string>
-    <string name="action_refresh" translatable="false">Refresh</string>
+
+    <!-- movie list menu -->
+    <string name="most_popular" transpatable="false">Most popular</string>
+    <string name="highest_rated" translatable="false">Highest rated</string>
 </resources>
