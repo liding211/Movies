@@ -22,15 +22,14 @@ import java.util.HashMap;
 
 public class MovieFetchTask extends AsyncTask<MovieFetchTask.MoviesListType, Void, HashMap<Integer, HashMap<String, String>>> {
 
-    private final String LOG_TAG = MovieFetchTask.class.getSimpleName();
-    private final String BASE_API_URL = "http://api.themoviedb.org";
-    private final String API_LEVEL = "3";
-    private final String SECTION_MOVIE = "movie";
-    private final String SLASH = "/";
+    public static final String LOG_TAG = MovieFetchTask.class.getSimpleName();
+    public static final String BASE_API_URL = "http://api.themoviedb.org";
+    public static final String API_LEVEL = "3";
+    public static final String SECTION_MOVIE = "movie";
+    public static final String SLASH = "/";
 
-
-    private final String SORT_BY_PARAM = "sort_by";
-    private final String API_KEY_PARAM = "api_key";
+    public static final String SORT_BY_PARAM = "sort_by";
+    public static final String API_KEY_PARAM = "api_key";
 
     // These are the names of the JSON objects that need to be extracted.
     public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w";

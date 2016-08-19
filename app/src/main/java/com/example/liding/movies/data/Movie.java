@@ -14,6 +14,7 @@ public class Movie implements Serializable {
     private String title;
     private String release_date;
     private String poster_image;
+    private HashMap<Integer, HashMap<String, String>> video;
     private Double vote;
 
     public Movie(HashMap<String, String> data) {
@@ -68,6 +69,17 @@ public class Movie implements Serializable {
 
     public String getPosterPath() {
         return getPosterPathWithSize(IMAGE_SIZE_342);
+    }
+
+    public void addVideos(HashMap<Integer, HashMap<String, String>> video) {
+        if (video == null || video.size() == 0) {
+            return;
+        }
+        this.video = video;
+    }
+
+    public HashMap<Integer, HashMap<String, String>> getVideo() {
+        return video;
     }
 
     public String getPosterPathWithSize(int size) {

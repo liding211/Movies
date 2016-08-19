@@ -1,13 +1,12 @@
 package com.example.liding.movies;
 
 import android.content.Context;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.example.liding.movies.CustomView.MoviePoster;
 import com.example.liding.movies.data.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -49,20 +48,42 @@ public class MovieAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+//        ViewHolder viewHolder;
+//
+//        if (convertView == null){
+//            convertView = LayoutInflater.from(context).inflate(R.layout.movie_list_item, parent, false);
+//            viewHolder = new ViewHolder();
+//            viewHolder.poster = (ImageView) convertView.findViewById(R.id.movie_list_poster);
+//            convertView.setTag(viewHolder);
+//        } else {
+//            viewHolder = (ViewHolder) convertView.getTag();
+//        }
+//
+//        if(moviesList != null && !moviesList.isEmpty()) {
+//            Picasso.with(context)
+//                .load(moviesList.get(position).getPosterPath())
+//                .into(viewHolder.poster);
+//        }
+//
+//        return convertView;
+
         ImageView imageView;
         if (convertView == null) {
-            imageView = new MoviePoster(context);
+            imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else {
             imageView = (ImageView) convertView;
         }
 
         if(moviesList != null && !moviesList.isEmpty()) {
-            Log.d(LOG_TAG, "Poster url - " + moviesList.get(position).getPosterPath());
             Picasso.with(context)
-                    .load(moviesList.get(position).getPosterPath())
-                    .into(imageView);
+                .load(moviesList.get(position).getPosterPath())
+                .into(imageView);
         }
         return imageView;
+    }
+
+    public static class ViewHolder {
+        ImageView poster;
     }
 }

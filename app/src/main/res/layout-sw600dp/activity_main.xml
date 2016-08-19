@@ -5,12 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.liding.movies.MainActivity"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <fragment
         android:id="@+id/movie_list_fragment"
         android:name="com.example.liding.movies.MovieListFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/movie_detail_fragment"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent" />
 
 </LinearLayout>

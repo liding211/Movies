@@ -5,4 +5,7 @@
     <!-- movie list menu -->
     <string name="most_popular" transpatable="false">Most popular</string>
     <string name="highest_rated" translatable="false">Highest rated</string>
+
+    <!-- movie details -->
+    <string name="movie_rate">%1$s/10</string>
 </resources>

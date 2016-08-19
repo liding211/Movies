@@ -1,7 +1,6 @@
 package com.example.liding.movies;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +20,10 @@ public class MovieListFragment extends Fragment {
     public static String EXTRA_MOVIE = "extra_movie";
 
     MovieAdapter adapter;
+
+    public interface Callback {
+        public void onItemSelected(Movie movie);
+    }
 
     @Override
     public  void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,7 @@ public class MovieListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Movie movie = adapter.getItem(position);
-
-                Intent movieDetailIntent = new Intent(getActivity(), DetailActivity.class);
-                movieDetailIntent.putExtra(EXTRA_MOVIE, movie);
-                startActivity(movieDetailIntent);
+                ((Callback) getActivity()).onItemSelected(movie);
             }
         });
 
